@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "github>aslafy-z/renovate-trivy-data:renovate-trivy"
+  ],
+  "enabledManagers": ["kubernetes", "github-actions"],
+  "kubernetes": {
+    "managerFilePatterns": ["/^k8s/.+\\.yaml$/"]
+  },
+  "schedule": ["* * 1 1 *"],
+  "prHourlyLimit": 0,
+  "packageRules": [
+    {
+      "description": "One branch for both edge images",
+      "matchPackageNames": ["quay.io/argoproj/argocd", "haproxy"],
+      "groupName": "edge"
+    }
+  ]
+}

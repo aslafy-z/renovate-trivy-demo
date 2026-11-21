@@ -1,0 +1,16 @@
+# Prowlarr 2.7.0 ships a .NET runtime with known critical CVEs; 3.0.2 fixes
+# them. renovate-trivy should get this PR opened ahead of the schedule.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+spec:
+  selector:
+    matchLabels: { app: prowlarr }
+  template:
+    metadata:
+      labels: { app: prowlarr }
+    spec:
+      containers:
+        - name: prowlarr
+          image: lscr.io/linuxserver/prowlarr:2.7.0

@@ -1,0 +1,20 @@
+# Control cases.
+# kener 4.2.1 has critical CVEs, but the available update fixes none of them:
+# its PR stays on the schedule, unlabelled.
+# nginx:1-alpine has no update to propose: it only shows up in the report.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kener
+spec:
+  selector:
+    matchLabels: { app: kener }
+  template:
+    metadata:
+      labels: { app: kener }
+    spec:
+      containers:
+        - name: kener
+          image: rajnandan1/kener:4.2.1
+        - name: proxy
+          image: nginx:1-alpine

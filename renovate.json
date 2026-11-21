@@ -4,17 +4,42 @@
     "config:recommended",
     "github>aslafy-z/renovate-trivy-data:renovate-trivy"
   ],
-  "enabledManagers": ["kubernetes", "github-actions"],
+  "enabledManagers": [
+    "kubernetes",
+    "helm-values",
+    "custom.regex",
+    "github-actions"
+  ],
   "kubernetes": {
-    "managerFilePatterns": ["/^k8s/.+\\.yaml$/"]
+    "managerFilePatterns": [
+      "/^k8s/.+\\.yaml$/"
+    ]
   },
-  "schedule": ["* * 1 1 *"],
+  "schedule": [
+    "* * 1 1 *"
+  ],
   "prHourlyLimit": 0,
   "packageRules": [
     {
       "description": "One branch for both edge images",
-      "matchPackageNames": ["quay.io/argoproj/argocd", "haproxy"],
+      "matchPackageNames": [
+        "quay.io/argoproj/argocd",
+        "haproxy"
+      ],
       "groupName": "edge"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "CloudNativePG Cluster imageName",
+      "managerFilePatterns": [
+        "/^k8s/.+\\.yaml$/"
+      ],
+      "matchStrings": [
+        "imageName:\\s*\"?(?<depName>[^\\s:\"]+):(?<currentValue>[^\\s\"]+)"
+      ],
+      "datasourceTemplate": "docker"
     }
   ]
 }

@@ -1,0 +1,7 @@
+# Helm values: Renovate's helm-values manager detects an image block that
+# carries both `repository` and `tag`.
+controllerManager:
+  manager:
+    image:
+      repository: registry.k8s.io/kueue/kueue
+      tag: v0.20.6

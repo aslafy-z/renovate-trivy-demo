@@ -11,11 +11,13 @@ now.
 
 ## What to look at
 
-| Image (`k8s/`) | Update Renovate proposes | Expected |
+| Image | Update Renovate proposes | Expected |
 |---|---|---|
 | `lscr.io/linuxserver/prowlarr:2.7.0` | `3.0.2` | PR opened now, labelled `security`, CVE note in the body |
 | `docker.io/valkey/valkey:9.2-alpine@sha256:cdcb…` | newer digest of the same tag | same: a digest-only update that fixes CVEs |
 | `quay.io/argoproj/argocd:v3.6.1` + `haproxy:3.4.7-alpine` | one grouped `edge` branch | PR opened now for both: argocd fixes a CVE, haproxy rides along |
+| `registry.k8s.io/kueue/kueue:v0.20.6` in `helm/kueue/values.yaml` | detected by the **helm-values** manager | scanned like any other image |
+| `ghcr.io/cloudnative-pg/postgresql:17.11` in `k8s/database.yaml` | detected by a **custom regex** manager (`imageName:`) | scanned like any other image |
 | `rajnandan1/kener:4.2.1` | `v4.2.2` | **stays** under "Awaiting Schedule": the update fixes nothing |
 | `nginx:1-alpine` | none | only in the report |
 

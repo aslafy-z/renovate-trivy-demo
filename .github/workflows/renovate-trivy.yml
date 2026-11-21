@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["k8s/**", "renovate.json", ".github/workflows/renovate-trivy.yml"]
+    paths: ["k8s/**", "helm/**", "renovate.json", ".github/workflows/renovate-trivy.yml"]
 
 concurrency:
   group: renovate-trivy

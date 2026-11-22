@@ -22,21 +22,25 @@ now.
 | `nginx:1-alpine` | none | only in the report |
 
 - Pull requests: [labelled `security`](../../pulls?q=is%3Apr+label%3Asecurity)
-- Renovate's [Dependency Dashboard](../../issues?q=is%3Aissue+Dependency+Dashboard), with a link to the report in its header
-- The [CVE report](https://github.com/aslafy-z/renovate-trivy-data/blob/main/repos/aslafy-z/renovate-trivy-demo/report.md)
-  and the [generated preset](https://github.com/aslafy-z/renovate-trivy-data/blob/main/renovate-trivy.json)
+- Renovate's [Dependency Dashboard](../../issues?q=is%3Aissue+Dependency+Dashboard), with the CVE summary at the top
+- The [CVE report](https://github.com/aslafy-z/renovate-trivy-data/blob/data/repos/aslafy-z/renovate-trivy-demo/report.md)
+  and the [generated preset](https://github.com/aslafy-z/renovate-trivy-data/blob/data/renovate-trivy.json)
   in the data repository
 
 ## How it is wired
 
-- [`.github/workflows/renovate-trivy.yml`](.github/workflows/renovate-trivy.yml)
-  runs daily: a read-only `scan` job (Renovate lookup + Trivy), then a
-  `publish` job that pushes to
-  [aslafy-z/renovate-trivy-data](https://github.com/aslafy-z/renovate-trivy-data)
-  with the `RENOVATE_TRIVY_DATA_TOKEN` secret (a fine-grained token with
-  Contents read/write on the data repository only).
-- [`renovate.json`](renovate.json) extends
-  `github>aslafy-z/renovate-trivy-data:renovate-trivy`, the generated preset.
+This repository contains **no workflow and no token**. All it does is extend
+the generated preset in [`renovate.json`](renovate.json):
 
-Nothing here calls the GitHub API on Renovate's behalf: the labels, the PR
-notes and the early PRs are all Renovate's own doing, driven by the preset.
+```json
+"extends": ["config:recommended", "github>aslafy-z/renovate-trivy-data:renovate-trivy#data"]
+```
+
+The scanning happens in [aslafy-z/renovate-trivy-data](https://github.com/aslafy-z/renovate-trivy-data):
+its workflow clones this repository, asks Renovate (read-only) what it tracks
+and proposes, scans the images with Trivy and publishes the preset, the report
+and the SBOM archive to its own `data` branch.
+
+Nothing calls the GitHub API on Renovate's behalf: the labels, the PR notes,
+the early PRs and the summary at the top of the Dependency Dashboard are all
+Renovate's own doing, driven by the preset.

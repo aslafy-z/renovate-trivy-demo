@@ -22,7 +22,7 @@ now.
 | `nginx:1-alpine` | none | only in the report |
 
 - Pull requests: [labelled `security`](../../pulls?q=is%3Apr+label%3Asecurity)
-- Renovate's [Dependency Dashboard](../../issues?q=is%3Aissue+Dependency+Dashboard), with the CVE summary at the top
+- Renovate's [Dependency Dashboard](../../issues?q=is%3Aissue+Dependency+Dashboard), with a CVE section at the bottom, each fixing update linked to its PR
 - The [CVE report](https://github.com/aslafy-z/renovate-trivy-data/blob/data/repos/aslafy-z/renovate-trivy-demo/report.md)
   and the [generated preset](https://github.com/aslafy-z/renovate-trivy-data/blob/data/renovate-trivy.json)
   in the data repository
@@ -42,5 +42,5 @@ and proposes, scans the images with Trivy and publishes the preset, the report
 and the SBOM archive to its own `data` branch.
 
 Nothing calls the GitHub API on Renovate's behalf: the labels, the PR notes,
-the early PRs and the summary at the top of the Dependency Dashboard are all
+the early PRs and the CVE section at the bottom of the Dependency Dashboard are all
 Renovate's own doing, driven by the preset.

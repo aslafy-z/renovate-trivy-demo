@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: argocd-server
-          image: quay.io/argoproj/argocd:v3.6.1
+          image: quay.io/argoproj/argocd:v3.6.3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,4 +29,4 @@ spec:
     spec:
       containers:
         - name: haproxy
-          image: haproxy:3.4.7-alpine
+          image: haproxy:3.4.8-alpine

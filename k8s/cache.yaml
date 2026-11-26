@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
         - name: valkey
-          image: docker.io/valkey/valkey:9.2-alpine@sha256:cdcb7b1c7b6f1c9cb9442c71ac6275e78184657448407b2c1fdde7ee8024f4fb
+          image: docker.io/valkey/valkey:9.2-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
